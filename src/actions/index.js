@@ -1,11 +1,17 @@
 import jsonPlaceholder from "../apis/jsonPlaceholder";
 
 // create inner function for API hit
-export const fetchPost = () => async (dispatch) => {
-  const response = await jsonPlaceholder.get("/post");
+export const fetchPosts = () => async (dispatch) => {
+  const response = await jsonPlaceholder.get("/posts");
   dispatch({ type: "FETCH_POSTS", payload: response.data });
+  // console.log(response.data);
 };
 
+export const fetchUser = (id) => async (dispatch) => {
+  const response = await jsonPlaceholder.get(`/users/${id}`);
+  dispatch({ type: "FETCH_USER", payload: response.data });
+  console.log(response.data);
+};
 // could be written as below:
 
 // export const fetchPost = () => {
