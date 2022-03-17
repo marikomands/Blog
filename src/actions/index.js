@@ -6,10 +6,16 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
   console.log(getState().posts);
 
-  const userIds = _.uniq(_.map(getState().posts, "userId"));
-  console.log("🚀 ~ fetchPostsAndUsers ~ userIds", userIds);
-  userIds.forEach((id) => dispatch(fetchUser(id)));
+  // const userIds = _.uniq(_.map(getState().posts, "userId"));
   // console.log("🚀 ~ fetchPostsAndUsers ~ userIds", userIds);
+  // userIds.forEach((id) => dispatch(fetchUser(id)));
+  // console.log("🚀 ~ fetchPostsAndUsers ~ userIds", userIds);
+
+  _.chain(getState().posts)
+    .map("userId")
+    .uniq()
+    .forEach((id) => dispatch(fetchUser(id)))
+    .value();
 };
 
 // create inner function for API hit with Redux-Thunk
