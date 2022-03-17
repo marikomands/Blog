@@ -9,7 +9,7 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   const userIds = _.uniq(_.map(getState().posts, "userId"));
   console.log("🚀 ~ fetchPostsAndUsers ~ userIds", userIds);
   userIds.forEach((id) => dispatch(fetchUser(id)));
-  console.log("🚀 ~ fetchPostsAndUsers ~ userIds", userIds);
+  // console.log("🚀 ~ fetchPostsAndUsers ~ userIds", userIds);
 };
 
 // create inner function for API hit with Redux-Thunk
@@ -24,7 +24,7 @@ export const fetchPosts = () => async (dispatch) => {
 export const fetchUser = (id) => async (dispatch) => {
   const response = await jsonPlaceholder.get(`/users/${id}`);
   dispatch({ type: "FETCH_USER", payload: response.data });
-  console.log(response.data);
+  console.log(response);
 };
 
 // export const fetchUser = (id) => async (dispatch) => {
